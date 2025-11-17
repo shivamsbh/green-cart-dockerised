@@ -11,6 +11,7 @@ import cartRouter from './routes/cartRoute.js';
 import addressRouter from './routes/addressRoute.js';
 import orderRouter from './routes/orderRoute.js';
 import { stripeWebhooks } from './controllers/orderController.js';
+import runSeed from './seedRunner.js';
 
 const app = express();
 
@@ -19,8 +20,10 @@ const port = process.env.PORT || 4000;
 
 // Connect to MongoDB and Cloudinary from db.js and cloudinary.js
 await connectDB();
-
 await connectCloudinary();
+
+// Run database seeding
+await runSeed();
 
 // Define allowed origins
 const allowedOrigins = new Set([
